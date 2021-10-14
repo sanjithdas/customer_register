@@ -15,7 +15,8 @@ Steps to execute the applications
 
         php artisan serve  
         
-        Some of the Api end points are 
+        Some of the Api end points are :-
+        
         http://localhost:8000/api/customer (GET)
         
         http://127.0.0.1:8000/api/customer/ (POST)
