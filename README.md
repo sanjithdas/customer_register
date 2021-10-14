@@ -27,5 +27,7 @@ Steps to execute the applications
         
         http://127.0.0.1:8000/api/contacts/{customerid} (GET) - All the contacts for a customer
         
+        http://127.0.0.1:8000/api/contacts/{customerid} (POST) - All the contacts for a customer
+        
         
     
