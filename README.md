@@ -10,7 +10,9 @@ Steps to execute the applications
     Start Apache server and mysql using XAMPP control panel
     
     Update .env file for database connectivity
-4. Run the scripts
+    
+4. Run the scripts using
+
         php artisan serve  
         
         Some of the Api end points are 
