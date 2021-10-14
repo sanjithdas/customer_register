@@ -6,7 +6,9 @@ Steps to execute the applications
 2. PHP 7.2.5 or later for the current version of Laravel.
 3. Creating a new project
     composer create-project --prefer-dist laravel/laravel customer_register
+    
     Start Apache server and mysql using XAMPP control panel
+    
     Update .env file for database connectivity
 4. Run the scripts
         php artisan serve  
