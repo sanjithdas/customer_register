@@ -6,6 +6,7 @@ use App\Http\Requests\CustomerCreateRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Http\Resources\Customer as ResourcesCustomer;
 use App\Http\Resources\CustomerCollection;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -125,7 +126,10 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
+        $contact = Contact::where('customer_id', $customer->id);
+        $contact->delete();
         $customer->delete();
+
         return response()->json(['message' => 'User deleted successfully']);
     }
 }
