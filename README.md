@@ -29,11 +29,11 @@ Steps to execute the applications
         
         http://127.0.0.1:8000/api/contacts/{customerid} (POST) - All the contacts for a customer
         
-        ![image](https://user-images.githubusercontent.com/18461928/137405542-d2ef296c-47ad-4724-9204-ccfeae3513b0.png)
         
-        ![image](https://user-images.githubusercontent.com/18461928/137405641-17d43053-365e-421d-a1cd-0bde879392d7.png)
+       ![image](https://user-images.githubusercontent.com/18461928/137405784-0bfa9361-2e0b-477c-b95f-27aca6d3fa4a.png)
 
 
-        
+        ![image](https://user-images.githubusercontent.com/18461928/137405725-27b98b8c-77a7-46aa-9539-cc54d9394f42.png)
+
         
     
