@@ -20,6 +20,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        //I would paginate and order the collection by name - to avoid load on DB
         $customers = Customer::all();
         return response()->json(new CustomerCollection($customers));
     }
@@ -64,6 +65,7 @@ class CustomerController extends Controller
             'phone' => $request->phone
         ]);
 
+        //after save - redirect to show route (Please refer to ContactController store method)
         if (!is_null($customer)) {
             return (new ResourcesCustomer($customer))
                 ->response()
@@ -81,6 +83,7 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
+        //I would return customer resource here
         return response()->json($customer);
     }
 
@@ -92,6 +95,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
+        //I would return customer resource here
         return response()->json(['status' => 200, 'customer' => $customer]);
     }
 
@@ -115,6 +119,7 @@ class CustomerController extends Controller
         }
 
         $customer->update($request->all());
+        //I would return customer resource again
         return response()->json(['message' => 'User updated successfully', 'cutomer' => $customer]);
     }
 
@@ -126,8 +131,11 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $contact = Contact::where('customer_id', $customer->id);
-        $contact->delete();
+        //
+        // $contact = Contact::where('customer_id', $customer->id);
+        // $contact->delete();
+        //Also we can put this in a DB transaction
+        $customer->contacts()->delete();
         $customer->delete();
 
         return response()->json(['message' => 'User deleted successfully']);

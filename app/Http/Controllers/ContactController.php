@@ -37,6 +37,9 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+        //comments
+        //Can move this to form request class
+        //I would validate if customer_id exists in db before inserting
         $validator = Validator::make($request->all(), [
             'address' => 'required',
             'city' => 'required',
@@ -48,22 +51,20 @@ class ContactController extends Controller
             return response()->json(["validation_errors" => $validator->errors()]);
         }
 
-
+        
         $contact = Contact::create([
-            'customer_id' => $request->customer_id,
+            'customer_id' => $request->customer_id, 
             'address' => $request->address,
             'city' => $request->city,
             'pincode' => $request->pincode,
             'work_phone' => $request->work_phone
         ]);
-
-        if (!is_null($contact)) {
-            return (new ResourceContact($contact))
-                ->response()
-                ->setStatusCode(201);
-        } else {
-            return response()->json(["status" => "failed", "message" => "Registration failed!"]);
-        }
+        
+        //changed - redirect to show route 
+        return is_null($contact) 
+        ? response()->json(["status" => "failed", "message" => "Registration failed!"])
+        : return route('contacts.show', contact->id) ;
+        
     }
 
     /**
@@ -72,49 +73,21 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $contact)
+    public function show(Contact $contact)
     {
-        $customer = Customer::with('contacts')->where('id', $contact->id)->get();
-        // return $customer;
-        if (!is_null($customer)) {
-            return response()->json($customer)
-                ->setStatusCode(201);
-        } else {
-            return response()->json(["status" => "failed", "message" => "Registration failed!"]);
-        }
+        // $customer = Customer::with('contacts')->where('id', $contact->id)->get();
+        // // return $customer;
+        // if (!is_null($customer)) {
+        //     return response()->json($customer)
+        //         ->setStatusCode(201);
+        // } else {
+        //     return response()->json(["status" => "failed", "message" => "Registration failed!"]);
+        // }
+
+            
+        return (new ResourceContact($contact))
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Contact $contact)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Contact $contact)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Contact $contact)
-    {
-        //
-    }
 }
